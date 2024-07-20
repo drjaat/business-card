@@ -120,7 +120,7 @@ export default function App() {
               type="text"
               label="Address"
               variant="outlined"
-              value={email}
+              value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
             <TextField

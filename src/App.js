@@ -18,6 +18,7 @@ export default function App() {
   const [email, setEmail] = React.useState("");
   const [address, setAddress] = React.useState("");
   const [website, setWebsite] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,6 +35,7 @@ export default function App() {
     });
 
     // Send the data to the Sheets API url
+    setLoading(true);
     const response = await fetch("https://script.google.com/macros/s/AKfycbxD5JNJt-EVbUpCslhGlwh9yhMLlzpxALH_eBD7NQOi86vei3Gtl7uosXU3ZJJVMyfT/exec", {
       method: "POST",
       body: data.toString(),
@@ -50,9 +52,10 @@ export default function App() {
     setCompany("");
     setMobile("");
     setEmail("");
-    setAddress(0);
+    setAddress("");
     setWebsite("");
 
+    setLoading(false);
     alert("Data submitted successfully!");
   };
 
@@ -137,8 +140,10 @@ export default function App() {
               color="primary"
               type="submit"
               className="submit-button"
+              disabled={loading}
+
             >
-              Save
+              {loading ? "Saving..." : "Save"}
             </Button>
           </form>
         </Paper>
